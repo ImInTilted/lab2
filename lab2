@@ -1,0 +1,51 @@
+ static void Main(string[] args)
+        {
+            Console.Write("Введите размер квадратной матрицы ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            while (n <= 0)
+            {
+                Console.WriteLine("неверный размер!");
+                n = Convert.ToInt32(Console.ReadLine());
+            }
+            int[,] M = new int[n, n];
+            int max, min, s;
+            Random rnd = new Random();
+            Console.WriteLine("Матрица размера " + n.ToString() + "x" + n.ToString() + ", заполненная случайными числами:");
+            Console.WriteLine();
+            for (int r = 0; r < n; r++)
+            {
+                for (int c = 0; c < n; c++)
+                {
+                    M [r ,c] = rnd.Next(0, 10);
+                    Console.Write(M[r, c].ToString() + " ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+            max = M[0, 0];
+            min = max;
+            for (int r = 0; r < n; r++)
+            {
+                if (M[r, r] > max)
+                    max = M[r, r];
+                if (M[r, r] < min)
+                    min = M[r, r];
+            }
+            s = min + max;
+            Console.WriteLine("Сумма максимального и минимального элемента на главной дигонали: " + s.ToString());
+            Console.WriteLine();
+            max = M[0, 0];
+            min = max;
+            for (int r = 0, c = n - 1; r < n; r++, c--)
+            {
+                if (M[r, c] > max)
+                    max = M[r, c];
+                if (M[r, c] < min)
+                    min = M[r, c];
+            }
+            s = s + min + max;
+            Console.WriteLine("Сумма максимального и минимального элемента побочной дигонали: " + (min + max).ToString());
+            Console.WriteLine();
+            Console.WriteLine("общая сумма(результат): " + s.ToString());
+            Console.ReadKey();
+        }
